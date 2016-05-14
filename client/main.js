@@ -21,25 +21,23 @@ import './main.html';
 //   },
 // });
 
-var Schemas = {};
 
-Schemas.Book = new SimpleSchema({
-    title: {
-        type: String,
-        label: "Title",
-        max: 200
-    },
-    author: {
-        type: String,
-        label: "Author"
-    }
+CommentSchema = new SimpleSchema({
+	email: {
+		type: String
+	},
+	text: {
+		type: String
+	}
 });
 
-Books = new Mongo.Collection("books");
+Comment = new Mongo.Collection('Comment');
 
-Books.attachSchema(Schemas.Book);
+Comment.attachSchema(CommentSchema);
 
-var a = Books.simpleSchema().namedContext().validate({title: "Ulysses", author: "James Joyce"}, {modifier: false});
-console.log(a);
+var obj = {
+	"email": "a@a.com",
+	"text": "test"
+}
 
-
+console.log(Comment.simpleSchema().namedContext().validate(obj, {modifier: false}));
