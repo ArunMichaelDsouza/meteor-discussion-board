@@ -21,4 +21,25 @@ import './main.html';
 //   },
 // });
 
-Comments = new Mongo.Collection('Comments');
+var Schemas = {};
+
+Schemas.Book = new SimpleSchema({
+    title: {
+        type: String,
+        label: "Title",
+        max: 200
+    },
+    author: {
+        type: String,
+        label: "Author"
+    }
+});
+
+Books = new Mongo.Collection("books");
+
+Books.attachSchema(Schemas.Book);
+
+var a = Books.simpleSchema().namedContext().validate({title: "Ulysses", author: "James Joyce"}, {modifier: false});
+console.log(a);
+
+
