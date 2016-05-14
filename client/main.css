@@ -1,1 +1,7 @@
-/* CSS declarations go here */
+/* Global CSS declarations go here */
+
+html,
+body {
+	font-size: 16px;
+	font-family: Helvetica, sans-serif;
+}
