@@ -76,6 +76,7 @@ Template.login.events({
 		    if(res.statusCode === 200) {
 		    	event.target.email.value = event.target.password.value = '';
 		    	template.lastError.set('');
+		    	//console.log(res.message);
 		    }
 		    else {
 		    	template.lastError.set(res.message);
