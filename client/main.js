@@ -1,7 +1,6 @@
+// Module imports
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
-
-
 import './main.html';
 
 // Template.hello.onCreated(function helloOnCreated() {
@@ -22,23 +21,23 @@ import './main.html';
 //   },
 // });
 
-
-
-
+// Subscribe to server side publishes
 Tracker.autorun(function(){
+
+	// Fetch all comments
 	Meteor.subscribe('comments', function() {
 		var comments = Comments.find().fetch();
 		console.log(comments);
 	});
 
+	// Fetch user list
 	Meteor.subscribe('users', function() {
 		var users = Users.find().fetch();
 		console.log(users);
 	});
 });
 
-
-
+// Login template helpers
 Template.login.onCreated(function() {
 	this.lastError = new ReactiveVar(null);
 });
@@ -49,21 +48,21 @@ Template.login.helpers({
   }
 });
 
-
-
+// Login template events
 Template.login.events({
+
+	// Login form submit event
 	'submit .login-form'(event, template) {
 
 		event.preventDefault();
 
+		// Get form data
 		const data = {
 	      email: event.target.email.value,
 	      password: event.target.password.value,
 	    };
 
-	    console.log(data);
-
-
+	    // Call user creation method
 	    Meteor.call('newUser.create', {
 		 	email: data.email,
 		 	password: data.password
