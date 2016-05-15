@@ -36,7 +36,7 @@ Tracker.autorun(function(){
 });
 
 Template.login.events({
-	'submit .login-form'(event) {
+	'submit .login-form'(event, template) {
 
 		event.preventDefault();
 
@@ -56,7 +56,8 @@ Template.login.events({
 		  if (err) {
 		    console.log(err);
 		  } else {
-		    console.log(err, res);
+		    console.log(res);
+		    template.find('#error').innerHTML = 'ERROR';
 		  }
 		});
 	}
