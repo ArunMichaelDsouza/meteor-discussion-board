@@ -20,13 +20,19 @@ Meteor.startup(() => {
     // Attaching CommentSchema to Comments collection
     Comments.attachSchema(CommentSchema);
 
-    var obj = {
+    var commentObj = {
         "email": "a@a.com",
         "text": "test"
     }
 
     // Validating sample object 
-    var isValid = Comments.simpleSchema().namedContext().validate(obj, { modifier: false });
+    var isValid = Comments.simpleSchema().namedContext().validate(commentObj, { modifier: false });
     console.log(isValid);
+
+    if(isValid) {
+    	Comments.insert(commentObj);
+    }
+
+    console.log(Comments.find().fetch());
 
 });
