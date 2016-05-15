@@ -1,7 +1,97 @@
-/* Global CSS declarations go here */
+/* CSS declarations go here */
 
 html,
 body {
 	font-size: 16px;
 	font-family: Helvetica, sans-serif;
+	background-color: #f3f5f7;
 }
+
+/* Login interface styles */
+.login-wrapper {
+	background-color: #fff;
+	width: 450px;
+	margin: 70px auto;
+	box-shadow: 1px 2px 1px rgba(0,0,0,.15);
+	padding: 30px;
+}
+
+.login-header {
+	margin: 0 0 30px;
+	font-size: 1.75em;
+	font-weight: 400;
+	text-align: center;
+	color: #5a5a5a;
+}
+
+.input-box,
+.input-label {
+	display: block;
+	font-size: 1em;
+	font-weight: 300;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.input-box {
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	padding: 10px;
+	margin: 10px 0 20px;
+}
+
+.btn-submit {
+	display: block;
+	width: 30%;
+	margin: 30px auto 0;
+	background-color: #50a4e2;
+	color: #fff;
+	font-size: 1em;
+	font-weight: 300;
+	border: none;
+	padding: 10px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.btn-submit:hover {
+	background-color: #00a0e3;
+}
+
+.input-box:focus {
+	outline: none;
+	box-shadow: 0px 0px 2px #00a0e3;
+	border: 1px solid #50a4e2;
+}
+/* Login interface styles */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

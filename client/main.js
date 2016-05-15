@@ -1,7 +1,6 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
-import { insert } from '../lib/methods.js';
 
 import './main.html';
 
@@ -24,16 +23,33 @@ import './main.html';
 // });
 
 
-Comments = new Mongo.Collection('Comments');
 
-Users = new Mongo.Collection('Users');
 
 Tracker.autorun(function(){
 	Meteor.subscribe('comments', function() {
 		var comments = Comments.find().fetch();
 		console.log(comments);
 	});
+
+	Meteor.subscribe('users', function() {
+		var users = Users.find().fetch();
+		console.log(users);
+	});
 });
+
+
+
+Template.login.onCreated(function() {
+	this.lastError = new ReactiveVar(null);
+});
+
+Template.login.helpers({
+  errorMessage: function() {
+    return Template.instance().lastError.get();
+  }
+});
+
+
 
 Template.login.events({
 	'submit .login-form'(event, template) {
@@ -47,7 +63,6 @@ Template.login.events({
 
 	    console.log(data);
 
-	    Meteor.wrapAsync()
 
 	    Meteor.call('newUser.create', {
 		 	email: data.email,
@@ -55,9 +70,10 @@ Template.login.events({
 		}, (err, res) => {
 		  if (err) {
 		    console.log(err);
+		    template.lastError.set('Error');
 		  } else {
 		    console.log(res);
-		    template.find('#error').innerHTML = 'ERROR';
+		    template.lastError.set('Success');
 		  }
 		});
 	}

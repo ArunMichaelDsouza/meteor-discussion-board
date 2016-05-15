@@ -24,11 +24,9 @@ Meteor.startup(() => {
     	}
     });
 
-    // Creating comments collection
-    Comments = new Mongo.Collection('Comments');
+    
 
-    // Creating users collection
-    Users = new Mongo.Collection('Users');
+   
 
     // Attaching CommentSchema to Comments collection
     Comments.attachSchema(CommentSchema);
@@ -53,6 +51,10 @@ Meteor.startup(() => {
 
     Meteor.publish('comments', function() {
     	return Comments.find();
+	});
+
+	Meteor.publish('users', function() {
+    	return Users.find();
 	});
 
 });

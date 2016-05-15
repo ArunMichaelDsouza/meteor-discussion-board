@@ -1,10 +1,17 @@
 <template name="login">
-	<form class="login-form">
-		<label>Email</label>
-		<input type="email" placeholder="Enter your email" name="email" required/>
-		<label>Password</label>
-		<input type="password" placeholder="Enter your password" name="password" required/>
-		<button type="submit">Submit</button>
-		<div id="error"></div>
-	</form>
+	<div class="login-wrapper">
+		<h1 class="login-header">
+			Disussion Board
+		</h1>
+		<form class="login-form">
+			<label class="input-label">Email</label>
+			<input class="input-box" type="email" placeholder="Enter your email" name="email" required/>
+			<label class="input-label">Password</label>
+			<input class="input-box" type="password" placeholder="Enter your password" name="password" required/>
+			<button class="btn-submit" type="submit">Login</button>
+			{{#if errorMessage}}
+	        	<div class="ui error message">{{errorMessage}}</div>
+	        {{/if}}
+		</form>
+	</div>
 </template>
