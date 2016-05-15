@@ -29,10 +29,14 @@ Meteor.startup(() => {
     var isValid = Comments.simpleSchema().namedContext().validate(commentObj, { modifier: false });
     console.log(isValid);
 
-    if(isValid) {
-    	Comments.insert(commentObj);
-    }
+    // if(isValid) {
+    // 	Comments.insert(commentObj);
+    // }
 
     console.log(Comments.find().fetch());
+
+    Meteor.publish('comments', function() {
+    	return Comments.find();
+	});
 
 });

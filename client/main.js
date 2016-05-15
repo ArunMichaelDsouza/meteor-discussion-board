@@ -21,3 +21,11 @@ import './main.html';
 //   },
 // });
 
+ Comments = new Mongo.Collection('Comments');
+
+Tracker.autorun(function(){
+	var a = Meteor.subscribe('comments');
+	console.log(Comments.find().fetch());
+});
+
+
