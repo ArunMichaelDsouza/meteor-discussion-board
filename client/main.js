@@ -21,11 +21,27 @@ import './main.html';
 //   },
 // });
 
+
  Comments = new Mongo.Collection('Comments');
 
 Tracker.autorun(function(){
-	var a = Meteor.subscribe('comments');
-	console.log(Comments.find().fetch());
+	Meteor.subscribe('comments', function() {
+		var comments = Comments.find().fetch();
+		console.log(comments);
+	});
 });
 
+Template.login.events({
+	'submit .login-form'(event) {
+
+		event.preventDefault();
+
+		const data = {
+	      email: event.target.email.value,
+	      password: event.target.password.value,
+	    };
+
+	    console.log(data);
+	}
+});
 
