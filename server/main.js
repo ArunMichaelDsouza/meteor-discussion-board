@@ -6,19 +6,35 @@ Meteor.startup(() => {
     // Creating comment schema
     CommentSchema = new SimpleSchema({
         email: {
-            type: String,
-            unique: true
+            type: String
         },
         text: {
             type: String
         }
     });
 
+    // Creating user schema
+    UserSchema = new SimpleSchema({
+    	email: {
+    		type: String,
+    		unique: true
+    	},
+    	password: {
+    		type: String
+    	}
+    });
+
     // Creating comments collection
     Comments = new Mongo.Collection('Comments');
 
+    // Creating users collection
+    Users = new Mongo.Collection('Users');
+
     // Attaching CommentSchema to Comments collection
     Comments.attachSchema(CommentSchema);
+
+    // Attaching UserSchema to Users collection
+    Users.attachSchema(UserSchema);
 
     var commentObj = {
         "email": "a@a.com",

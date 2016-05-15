@@ -1,6 +1,8 @@
 import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 
+import { insert } from '../lib/methods.js';
+
 import './main.html';
 
 // Template.hello.onCreated(function helloOnCreated() {
@@ -42,6 +44,19 @@ Template.login.events({
 	    };
 
 	    console.log(data);
+
+	    Meteor.call('newUser.create', {
+		 	email: data.email,
+		 	password: data.password
+		}, (err, res) => {
+		  if (err) {
+		    console.log(err);
+		  } else {
+		    console.log(res);
+		  }
+		});
 	}
 });
+
+
 
