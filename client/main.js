@@ -21,23 +21,3 @@ import './main.html';
 //   },
 // });
 
-
-CommentSchema = new SimpleSchema({
-	email: {
-		type: String
-	},
-	text: {
-		type: String
-	}
-});
-
-Comment = new Mongo.Collection('Comment');
-
-Comment.attachSchema(CommentSchema);
-
-var obj = {
-	"email": "a@a.com",
-	"text": "test"
-}
-
-console.log(Comment.simpleSchema().namedContext().validate(obj, {modifier: false}));
