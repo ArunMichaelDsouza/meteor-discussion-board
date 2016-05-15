@@ -24,7 +24,9 @@ import './main.html';
 // });
 
 
- Comments = new Mongo.Collection('Comments');
+Comments = new Mongo.Collection('Comments');
+
+Users = new Mongo.Collection('Users');
 
 Tracker.autorun(function(){
 	Meteor.subscribe('comments', function() {
@@ -45,6 +47,8 @@ Template.login.events({
 
 	    console.log(data);
 
+	    Meteor.wrapAsync()
+
 	    Meteor.call('newUser.create', {
 		 	email: data.email,
 		 	password: data.password
@@ -52,7 +56,7 @@ Template.login.events({
 		  if (err) {
 		    console.log(err);
 		  } else {
-		    console.log(res);
+		    console.log(err, res);
 		  }
 		});
 	}
