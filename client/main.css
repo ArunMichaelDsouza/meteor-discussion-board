@@ -7,6 +7,8 @@ body {
 	background-color: #f3f5f7;
 }
 
+
+
 /* Login interface styles */
 .login-wrapper {
 	background-color: #fff;
@@ -17,39 +19,40 @@ body {
 }
 
 .login-header {
-	margin: 0 0 30px;
+	margin: 0 0 40px;
 	font-size: 1.75em;
 	font-weight: 400;
 	text-align: center;
-	color: #5a5a5a;
+	color: #50a4e2;
 }
 
 .input-box,
 .input-label {
-	display: block;
+	
 	font-size: 1em;
 	font-weight: 300;
 	width: 100%;
 	box-sizing: border-box;
+	color: #444;
 }
 
 .input-box {
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	padding: 10px;
-	margin: 10px 0 20px;
+	margin: 10px 0 30px;
 }
 
 .btn-submit {
 	display: block;
 	width: 30%;
-	margin: 30px auto 0;
+	margin: 10px auto 0;
 	background-color: #50a4e2;
 	color: #fff;
 	font-size: 1em;
 	font-weight: 300;
 	border: none;
-	padding: 10px;
+	padding: 12px;
 	cursor: pointer;
 	border-radius: 4px;
 }
@@ -63,7 +66,28 @@ body {
 	box-shadow: 0px 0px 2px #00a0e3;
 	border: 1px solid #50a4e2;
 }
+
+.error {
+	color: #d9434e;
+}
+
+.error-message {
+	text-align: center;
+	font-size: 1em;
+	margin: 0 0 20px;
+}
 /* Login interface styles */
+
+
+
+/* Responsive styles */
+@media screen and (max-width: 480px) {
+	.login-wrapper {
+		width: 80%;
+	}
+}
+/* Responsive styles */
+
 
 
 

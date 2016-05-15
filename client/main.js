@@ -69,11 +69,17 @@ Template.login.events({
 		 	password: data.password
 		}, (err, res) => {
 		  if (err) {
-		    console.log(err);
-		    template.lastError.set('Error');
+		    //console.log(err);
+		    template.lastError.set('Server error. Please try again later');
 		  } else {
-		    console.log(res);
-		    template.lastError.set('Success');
+		    //console.log(res);
+		    if(res.statusCode === 200) {
+		    	event.target.email.value = event.target.password.value = '';
+		    	template.lastError.set('');
+		    }
+		    else {
+		    	template.lastError.set(res.message);
+		    }
 		  }
 		});
 	}
