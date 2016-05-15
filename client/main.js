@@ -75,6 +75,10 @@ Template.login.events({
 		    if(res.statusCode === 200) {
 		    	event.target.email.value = event.target.password.value = '';
 		    	template.lastError.set('');
+
+		    	// template.loggedIn.set(true);
+		    	// console.log(template.loggedIn.get());
+		    	
 		    	//console.log(res.message);
 		    }
 		    else {

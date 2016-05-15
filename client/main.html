@@ -5,7 +5,13 @@
 
 <body>
 	<main>
-		{{> login}}
+
+		{{#if hasLoggedIn}}
+			LoggedIn
+		{{else}}
+			{{> login}}
+		{{/if}}
+
 	</main>
 </body>
 
