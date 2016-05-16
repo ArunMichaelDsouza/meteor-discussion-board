@@ -3,24 +3,6 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
-// Template.hello.onCreated(function helloOnCreated() {
-//   // counter starts at 0
-//   this.counter = new ReactiveVar(0);
-// });
-
-// Template.hello.helpers({
-//   counter() {
-//     return Template.instance().counter.get();
-//   },
-// });
-
-// Template.hello.events({
-//   'click button'(event, instance) {
-//     // increment the counter when button is clicked
-//     instance.counter.set(instance.counter.get() + 1);
-//   },
-// });
-
 // Subscribe to server side publishes
 Tracker.autorun(function(){
 
@@ -37,19 +19,24 @@ Tracker.autorun(function(){
 	});
 });
 
+
 // Login template helpers
-Template.login.onCreated(function() {
+Template.app.onCreated(function() {
 	this.lastError = new ReactiveVar(null);
+	this.loggedIn = new ReactiveVar(0);
 });
 
-Template.login.helpers({
+Template.app.helpers({
   errorMessage: function() {
     return Template.instance().lastError.get();
+  },
+  hasLoggedIn: function() {
+  	return Template.instance().loggedIn.get();
   }
 });
 
 // Login template events
-Template.login.events({
+Template.app.events({
 
 	// Login form submit event
 	'submit .login-form'(event, template) {
@@ -76,9 +63,9 @@ Template.login.events({
 		    	event.target.email.value = event.target.password.value = '';
 		    	template.lastError.set('');
 
-		    	// template.loggedIn.set(true);
-		    	// console.log(template.loggedIn.get());
-		    	
+		    	// Set logged in status as true
+		    	template.loggedIn.set(1);
+
 		    	//console.log(res.message);
 		    }
 		    else {
