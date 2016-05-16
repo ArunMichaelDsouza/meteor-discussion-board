@@ -9,8 +9,8 @@ body {
 
 
 
-/* Login interface styles */
-.login-wrapper {
+/* Common UI elements */
+.card-wrapper {
 	background-color: #fff;
 	width: 450px;
 	margin: 70px auto;
@@ -18,7 +18,7 @@ body {
 	padding: 30px;
 }
 
-.login-header {
+.main-header {
 	margin: 0 0 40px;
 	font-size: 1.75em;
 	font-weight: 400;
@@ -26,21 +26,24 @@ body {
 	color: #50a4e2;
 }
 
-.input-box,
-.input-label {
-	
-	font-size: 1em;
-	font-weight: 300;
-	width: 100%;
-	box-sizing: border-box;
-	color: #444;
-}
-
 .input-box {
 	border: 1px solid #ddd;
 	border-radius: 4px;
 	padding: 10px;
 	margin: 10px 0 30px;
+}
+/* Common UI elements */
+
+
+
+/* Login interface styles */
+.input-box,
+.input-label {
+	font-size: 1em;
+	font-weight: 300;
+	width: 100%;
+	box-sizing: border-box;
+	color: #444;
 }
 
 .btn-submit {
@@ -80,9 +83,23 @@ body {
 
 
 
+/* Comment list interface styles */
+.comment-box {
+	resize: none;
+	height: 120px;
+	margin-bottom: 10px
+}
+
+.btn-comment {
+	margin-bottom: 10px;
+}
+/* Comment list interface styles */
+
+
+
 /* Responsive styles */
 @media screen and (max-width: 480px) {
-	.login-wrapper {
+	.card-wrapper {
 		width: 80%;
 	}
 }

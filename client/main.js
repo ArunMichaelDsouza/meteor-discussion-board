@@ -3,39 +3,31 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
-// Subscribe to server side publishes
-Tracker.autorun(function(){
-
-	// Fetch all comments
-	Meteor.subscribe('comments', function() {
-		var comments = Comments.find().fetch();
-		console.log(comments);
-	});
-
-	// Fetch user list
-	Meteor.subscribe('users', function() {
-		var users = Users.find().fetch();
-		console.log(users);
-	});
-});
-
-
-// Login template helpers
+// App template helpers
 Template.app.onCreated(function() {
-	this.lastError = new ReactiveVar(null);
-	this.loggedIn = new ReactiveVar(0);
+
+	// Subscribe to server side publishes
+	Meteor.subscribe('comments'); // Fetch all comments
+	Meteor.subscribe('users'); // Fetch user list
+
+	this.LoginError = new ReactiveVar(null); // Error message 
+	this.loggedIn = new ReactiveVar(0); // Log in flag
+	this.userEmail = new ReactiveVar(0); // Logged in user email
 });
 
 Template.app.helpers({
   errorMessage: function() {
-    return Template.instance().lastError.get();
+    return Template.instance().LoginError.get();
   },
   hasLoggedIn: function() {
   	return Template.instance().loggedIn.get();
+  },
+  allComments: function() {
+  	return Comments.find({}, {sort: {created: -1}})
   }
 });
 
-// Login template events
+// App events
 Template.app.events({
 
 	// Login form submit event
@@ -56,25 +48,55 @@ Template.app.events({
 		}, (err, res) => {
 		  if (err) {
 		    //console.log(err);
-		    template.lastError.set('Server error. Please try again later');
+		    template.LoginError.set('Server error. Please try again later');
 		  } else {
 		    //console.log(res);
 		    if(res.statusCode === 200) {
 		    	event.target.email.value = event.target.password.value = '';
-		    	template.lastError.set('');
+		    	template.LoginError.set('');
 
 		    	// Set logged in status as true
 		    	template.loggedIn.set(1);
 
-		    	//console.log(res.message);
+		    	// Get logged in user email
+		    	template.userEmail.set(res.userData.email);
+
+		    	//console.log(res);
 		    }
 		    else {
-		    	template.lastError.set(res.message);
+		    	template.LoginError.set(res.message);
+		    }
+		  }
+		});
+	},
+
+	// Comment create event
+	'submit .comment-form'(event, template, instance) {
+
+		event.preventDefault();
+
+		// Get form data
+		const data = {
+	      email: template.userEmail.get(),
+	      text: event.target.text.value,
+	    };
+
+	    // Call comment publish method
+	    Meteor.call('newComment.create', {
+		 	email: data.email,
+		 	text: data.text
+		}, (err, res) => {
+		  if (err) {
+		    //console.log(err);
+		  } else {
+		    //console.log(res);
+		    if(res.statusCode === 200) {
+		    	event.target.text.value = '';
+
+		    	//console.log(res);
 		    }
 		  }
 		});
 	}
 });
-
-
 

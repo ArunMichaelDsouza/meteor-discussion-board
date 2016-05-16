@@ -6,7 +6,7 @@ Meteor.startup(() => {
     Meteor.publish('comments', function() {
 
     	// Return comments list
-    	return Comments.find();
+    	return Comments.find({}, {sort: {created: -1}});
 	});
 
 	Meteor.publish('users', function() {

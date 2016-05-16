@@ -1,12 +1,31 @@
 <template name="app">
 	<main>
 	    {{#if hasLoggedIn}} 
+	    	<!-- Show comments list when logged in -->
 	    	<section>
-	    		Logged In
+	    		<div class="card-wrapper">
+	    			<h1 class="main-header">
+	    				Welcome to the Discussion board
+	    			</h1>
+	    			<form class="comment-form">
+	    				<textarea class="input-box comment-box" placeholder="Enter your comment" name="text" required></textarea>
+	    				<button class="btn-submit btn-comment" type="submit">Add Comment</button>
+	    			</form>
+	    			<div class="comments-wrapper">
+	    				{{#each allComments}}
+	    					{{email}}
+	    					<br/>
+	    					{{text}}
+	    					<hr/>
+	    				{{/each}}
+	    			</div>
+	    		</div>
 	    	</section>
+	    	<!-- Show comments list when logged in -->
 	    {{else}} 
-	    	<section class="login-wrapper">
-				<h1 class="login-header">
+	    	<!-- Show login wrapper when not logged in -->
+	    	<section class="card-wrapper">
+				<h1 class="main-header">
 					Discussion Board
 				</h1>
 				<form class="login-form">
@@ -15,11 +34,13 @@
 					<label class="input-label">Password</label>
 					<input class="input-box" type="password" placeholder="Enter your password" name="password" required/>
 					{{#if errorMessage}}
-			        	<div class="error error-message">{{errorMessage}}</div>
+			        	<div class="error error-message">	{{errorMessage}}
+			        	</div>
 			        {{/if}}
 					<button class="btn-submit" type="submit">Login</button>
 				</form>
 			</section>
+			<!-- Show login wrapper when not logged in -->
 	    {{/if}}
 	</main>	
 </template>
