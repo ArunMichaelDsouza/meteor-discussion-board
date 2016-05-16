@@ -3,6 +3,22 @@ import { Template } from 'meteor/templating';
 import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
+// Function to get cookie by name
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length,c.length);
+        }
+    }
+    return false;
+}
+
 // App template helpers
 Template.app.onCreated(function() {
 
@@ -13,6 +29,15 @@ Template.app.onCreated(function() {
 	this.LoginError = new ReactiveVar(null); // Error message 
 	this.loggedIn = new ReactiveVar(0); // Log in flag
 	this.userEmail = new ReactiveVar(0); // Logged in user email
+
+	// Check if user cookie exits
+	var hasLoggedIn = getCookie('user_email');
+
+	// Redirect to discussion board if yes
+	if(hasLoggedIn) {
+		this.loggedIn = new ReactiveVar(1);
+	}
+
 });
 
 Template.app.helpers({
@@ -58,6 +83,9 @@ Template.app.events({
 		    	// Set logged in status as true
 		    	template.loggedIn.set(1);
 
+		    	// Set cookie for logged in user
+		    	document.cookie = 'user_email='+res.userData.email;
+
 		    	// Get logged in user email
 		    	template.userEmail.set(res.userData.email);
 
@@ -97,6 +125,14 @@ Template.app.events({
 		    }
 		  }
 		});
-	}
+	},
+
+	// Logout event
+	'click .btn-logout'(event, template) {
+     	
+     	// Delete user cookie and logout user
+     	document.cookie = 'user_email=;';
+     	template.loggedIn.set(0);
+   	}
 });
 
