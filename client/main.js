@@ -66,36 +66,41 @@ Template.app.events({
 	      password: event.target.password.value,
 	    };
 
-	    // Call user creation method
-	    Meteor.call('newUser.create', {
-		 	email: data.email,
-		 	password: data.password
-		}, (err, res) => {
-		  if (err) {
-		    //console.log(err);
-		    template.LoginError.set('Server error. Please try again later');
-		  } else {
-		    //console.log(res);
-		    if(res.statusCode === 200) {
-		    	event.target.email.value = event.target.password.value = '';
-		    	template.LoginError.set('');
+	    if(data.email === '' || data.password === '') {
+	    	alert('Email and password cannot be blank');
+	    }
+	    else {
+	    	// Call user creation method
+		    Meteor.call('newUser.create', {
+			 	email: data.email,
+			 	password: data.password
+			}, (err, res) => {
+			  if (err) {
+			    //console.log(err);
+			    template.LoginError.set('Server error. Please try again later');
+			  } else {
+			    //console.log(res);
+			    if(res.statusCode === 200) {
+			    	event.target.email.value = event.target.password.value = '';
+			    	template.LoginError.set('');
 
-		    	// Set logged in status as true
-		    	template.loggedIn.set(1);
+			    	// Set logged in status as true
+			    	template.loggedIn.set(1);
 
-		    	// Set cookie for logged in user
-		    	document.cookie = 'user_email='+res.userData.email;
+			    	// Set cookie for logged in user
+			    	document.cookie = 'user_email='+res.userData.email;
 
-		    	// Get logged in user email
-		    	template.userEmail.set(res.userData.email);
+			    	// Get logged in user email
+			    	template.userEmail.set(res.userData.email);
 
-		    	//console.log(res);
-		    }
-		    else {
-		    	template.LoginError.set(res.message);
-		    }
-		  }
-		});
+			    	//console.log(res);
+			    }
+			    else {
+			    	template.LoginError.set(res.message);
+			    }
+			  }
+			});
+	    }
 	},
 
 	// Comment create event
@@ -109,22 +114,27 @@ Template.app.events({
 	      text: event.target.text.value,
 	    };
 
-	    // Call comment publish method
-	    Meteor.call('newComment.create', {
-		 	email: data.email,
-		 	text: data.text
-		}, (err, res) => {
-		  if (err) {
-		    //console.log(err);
-		  } else {
-		    //console.log(res);
-		    if(res.statusCode === 200) {
-		    	event.target.text.value = '';
+	    if(data.text === '') {
+	    	alert('Cannot post blank comment');
+	    }
+	    else {
+	    	// Call comment publish method
+		    Meteor.call('newComment.create', {
+			 	email: data.email,
+			 	text: data.text
+			}, (err, res) => {
+			  if (err) {
+			    //console.log(err);
+			  } else {
+			    //console.log(res);
+			    if(res.statusCode === 200) {
+			    	event.target.text.value = '';
 
-		    	//console.log(res);
-		    }
-		  }
-		});
+			    	//console.log(res);
+			    }
+			  }
+			});
+	    }
 	},
 
 	// Logout event

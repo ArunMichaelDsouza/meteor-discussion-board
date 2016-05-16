@@ -84,14 +84,48 @@ body {
 
 
 /* Comment list interface styles */
+.discussion-wrapper {
+	margin-top: 90px;
+}
+
 .comment-box {
 	resize: none;
-	height: 120px;
+	height: 80px;
 	margin-bottom: 10px
 }
 
 .btn-comment {
-	margin-bottom: 10px;
+	margin-bottom: 40px;
+}
+
+.btn-logout {
+	width: auto;
+    position: fixed;
+    right: 4%;
+    top: 4%;
+    padding: 12px 30px;
+}
+
+.comment-wrapper {
+	background-color: #f7f7f7;
+    padding: 12px;
+    color: #444;
+    font-weight: 400;
+    border-left: 2px solid #ddd;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-size: 1em;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.comment-author {
+	font-style: normal;
+	font-size: .8em;
+	color: #50a4e2;
+	margin-top: 10px;
 }
 /* Comment list interface styles */
 
@@ -101,6 +135,29 @@ body {
 @media screen and (max-width: 480px) {
 	.card-wrapper {
 		width: 80%;
+		padding: 20px;
+	}
+
+	.login-wrapper {
+		margin-top: 20px;
+	}
+
+	.btn-submit {
+		width: 70%;
+	}
+
+	.btn-logout {
+		width: auto;
+	}
+
+	.btn-logout {
+		position: absolute;
+	}
+
+	.main-header {
+		font-size: 1.35em;
+		margin-bottom: 10px;
+		line-height: 1.2em;
 	}
 }
 /* Responsive styles */

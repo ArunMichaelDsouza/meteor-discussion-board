@@ -2,9 +2,9 @@
 	<main>
 	    {{#if hasLoggedIn}} 
 	    	<!-- Show comments list when logged in -->
-	    	<button class="btn-logout">Logout</button>
+	    	<button class="btn-submit btn-logout">Logout</button>
 	    	<section>
-	    		<div class="card-wrapper">
+	    		<div class="card-wrapper discussion-wrapper">
 	    			<h1 class="main-header">
 	    				Welcome to the Discussion board
 	    			</h1>
@@ -14,10 +14,12 @@
 	    			</form>
 	    			<div class="comments-wrapper">
 	    				{{#each allComments}}
-	    					{{email}}
-	    					<br/>
-	    					{{text}}
-	    					<hr/>
+	    					<div class="comment-wrapper">
+		    					{{text}}
+		    					<div class="comment-author align-right">
+		    						 - {{email}}
+		    					</div>
+	    					</div>
 	    				{{/each}}
 	    			</div>
 	    		</div>
@@ -25,7 +27,7 @@
 	    	<!-- Show comments list when logged in -->
 	    {{else}} 
 	    	<!-- Show login wrapper when not logged in -->
-	    	<section class="card-wrapper">
+	    	<section class="card-wrapper login-wrapper">
 				<h1 class="main-header">
 					Discussion Board
 				</h1>
