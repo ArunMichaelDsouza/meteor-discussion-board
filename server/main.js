@@ -1,3 +1,4 @@
+// Module imports
 import { Meteor } from 'meteor/meteor';
 
 Meteor.startup(() => {
@@ -5,7 +6,7 @@ Meteor.startup(() => {
 	// Server side publishes
     Meteor.publish('comments', function() {
 
-    	// Return comments list
+    	// Return sorted comments list
     	return Comments.find({}, {sort: {created: -1}});
 	});
 
